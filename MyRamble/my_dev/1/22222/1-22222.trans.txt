@@ -1,0 +1,14 @@
+1-22222-0000 
+1-22222-0001 
+1-22222-0002 
+1-22222-0003 
+1-22222-0004 
+
+    layers=[]
+    for i in range(recur_layers):
+        rnn_i = GRU(name = 'base_rnn',units=units,return_sequences=True,implementation=2)(input_data)
+        rnn_i = BatchNormalization(name='b1_rnn')(rnn_i)
+        layers.append(rnn_i)
+    rnn = Concatenate(layers) 
+    # TODO: Add a TimeDistributed(Dense(output_dim)) layer
+    time_dense = TimeDistributed(Dense(output_dim))(rnn)
